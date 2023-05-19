@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="stylesheet.css" type="text/css">
+    <title>Vernam Cipher</title>
+</head>
+<header>
+    <li><a href="../../index.html">Home</a></li>
+</header>
+
+<body style="background-image:url(img/background.jpg)">
+    <div id="main">
+        <h1>
+            Vernam Cipher
+        </h1>
+        <div class="grid">
+            <textarea rows="1" id="key" placeholder="key" oninput="validate()"></textarea>
+            <textarea rows="3" id="plaintext" placeholder="plaintext" autofocus oninput="validate()"></textarea>
+            <div class="btns">
+                <button class="btn" id="cipher" onclick="encode()">
+          <span class="icons cip"></span>
+          <span class="txt">Encrypt</span>
+        </button>
+                <button class="btn" id="decipher" onclick="decode()">
+          <span class="icons dec"></span>
+          <span class="txt">Decrypt</span>
+        </button>
+                <button class="btn" id="copy" onclick="copyText()">
+          <span class="icons cop"></span>
+          <span class="txt">Copy</span>
+        </button>
+            </div>
+            <div id="warning"></div>
+        </div>
+    </div>
+</body>
+<script src="./code.js" type="text/javascript"></script>
+
+</html>

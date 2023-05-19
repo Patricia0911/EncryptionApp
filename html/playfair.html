@@ -1,0 +1,470 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Playfair</title>
+
+    <!-- load stylesheets -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
+    <!-- Google web font "Open Sans" -->
+    <link rel="stylesheet" href="font-awesome-4.5.0/css/font-awesome.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Bootstrap style -->
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src='script.js'></script>
+
+</head>
+</style>
+<header>
+    <li><a href="../index.html">Home</a></li>
+</header>
+
+
+<body style="background-image:url(img/background.jpg)">
+    <section class="cd-hero">
+        <ul class="cd-hero-slider autoplay">
+
+            <li class="selected">
+                <div class="cd-full-width">
+                    <div class="tm-slide-content-div">
+                        <form action="index.html" id="search-form">
+
+                            <h2 class="text-uppercase">Playfair Cipher</h2>
+                            <p class="m-b-mid">Gateway for secure transmission of messages using Encryption and Decryption</p>
+                            <div class="form-group">
+
+                                <p>Enter Key</p>
+                                <input id="cipherin" type="text">
+                                <button type="button" onclick="ciphersquare()">Submit</button>
+                                <p id="alphvalue"> </p>
+                                <p id="ciphersquarevalues"></p>
+                                <p id="ptable"></p>
+
+                                <p>Write the Message</p>
+                                <textarea id="plaintextin" type="text" cols="40" rows="8"></textarea>
+                                <button type="button" onclick="encodectext()">ENCRYPT</button><br>
+                                <p id="encoded">Encrypted Text:</p>
+
+                                <p>Encrypted Message</p>
+                                <input id="encodedtextin" type="text">
+                                <button type="button" onclick="decodedtext()">DECRYPT</button>
+                                <p id="decoded">Decrypted Text:</p>
+                        </form>
+                        </div>
+                    </div>
+                    <!-- .cd-full-width -->
+            </li>
+
+            </div>
+
+
+
+
+    </section>
+
+    <script>
+        function ciphersquare(cipher) {
+            //First, retrieve the value that was submitted:
+            var x = document.getElementById("cipherin");
+            var cipher = x.value;
+            if (cipher.length > 6)
+                var cipher = cipher.slice(-6);
+            //create an array of the alphabet, minus the letter j. This is so I have 25 elements for my 5x5 cipher 'square'
+
+            var alph = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+            //I then iterate through the alphabet array and remove all the letters that already occur in my cipher key
+            for (j = 0; j < cipher.length; j++) {
+                console.log("loop is executing");
+                for (i = 0; i < alph.length; i++) {
+                    if (alph[i] == cipher[j]) {
+                        alph.splice(i, 1);
+                        //document.getElementById("alphvalue").innerHTML ="For loop values"+ "j= "+ j +"    i= " + i +"The value of alph:  " +alph+ "\n";
+                    } else {}
+                }
+            }
+            //Here I need to check the input cipher for any letters that repeat themse
+            //First I'll split cipher into an array so i can iterate through it.
+            var ptable = cipher.split("");
+            console.log("The initial value of ptable: " + ptable);
+            for (i = 0; i < ptable.length; i++) {
+                for (j = i + 1; j < ptable.length; j++) {
+                    console.log("Loop two is executing" + "i=" + i + "j= " + j);
+                    console.log(ptable);
+                    if (ptable[i] == ptable[j]) {
+                        ptable.splice(j, 1);
+                        console.log("Loop two is deleting values from cipher");
+                        i = 0;
+                        j = 0;
+                    }
+                }
+            }
+            // Here i combine the ptable input cipher and the alphabet array to create my playfair cipher "square"
+            ptable = ptable.concat(alph);
+
+            //now make sure there aren't any 'j''s in our final array...if there are, it won't make it 5x5
+            for (i = 0; i < ptable.length; i++) {
+                if (ptable[i] == 'j') {
+                    ptable.splice(i, 1);
+                }
+            }
+            console.log("Here you go: " + cipher);
+            console.log(ptable);
+            document.getElementById("ciphersquarevalues").innerHTML = "your cipher square is: ";
+            document.getElementById("ptable").innerHTML = ptable;
+            return ptable;
+        }
+        //we will use the following function to encode a block of text using the given cipher code
+        function decodedtext() {
+            var x = document.getElementById("cipherin");
+            var cipher = x.value;
+            var y1 = document.getElementById("encodedtextin");
+            var textin = y1.value;
+            var textin = textin.split("");
+            var y2 = document.getElementById("plaintextin");
+            var textin2 = y2.value;
+            var textin2 = textin2.split("");
+
+            var ptable = ciphersquare(cipher);
+            var chgrec = [];
+            var textout = textin;
+
+            for (l = 0; l < textin.length - 1; l = l + 2) {
+                var A = textin[l];
+                var B = textin[l + 1];
+
+                for (i = 0; i < 25; i = i + 5) {
+                    var iter = 0;
+                    for (j = i; j < i + 5; j++) {
+                        if (A == ptable[j]) {
+                            iter = iter + 1;
+                            console.log(A + " is in series " + i + " through " + (i + 4) + " : " + iter + " time.");
+                        }
+                        if (B == ptable[j]) {
+                            iter = iter + 1;
+                            console.log(B + " is in series " + i + " through " + (i + 4) + " : " + iter + " time.");
+                        }
+
+                        if (A == ptable[j]) {
+                            if (j == (i)) {
+                                var o = ptable[j + 4];
+                            } else {
+                                var o = ptable[j - 1];
+                            }
+                        }
+                        if (B == ptable[j]) {
+                            if (j == (i)) {
+                                var t = ptable[j + 4];
+                            } else {
+                                var t = ptable[j - 1];
+                            }
+                        }
+                    }
+                    if (iter == 2) {
+                        textout.splice(l, 1, o);
+                        textout.splice(l + 1, 1, t);
+                        iter = 0;
+                        chgrec.push(l);
+                        console.log("value of ptable: " + ptable);
+                        console.log("value of textout: " + textout);
+                        console.log("Letters" + A + " and " + B + " are in same row, text out: " + textout);
+
+                    } else {
+                        iter = 0;
+                        console.log("Not in the same row: " + A + " and " + B);
+                    }
+                }
+                //}
+
+                //for(l=0;l<textin.length-1;l=l+2){
+                //var A=textin[l];
+                //var B=textin[l+1];
+                for (i = 0; i < 5; i = i + 1) {
+                    var iter = 0;
+                    for (j = i; j < 25; j = j + 5) {
+                        if (A == ptable[j]) {
+                            iter = iter + 1;
+                            console.log(A + " is in Column " + i + " : " + iter + " time.");
+                        }
+                        if (B == ptable[j]) {
+                            iter = iter + 1;
+                            console.log(B + " is in Column " + i + " : " + iter + " time.");
+                        }
+                        if (A == ptable[j]) {
+                            if (j == (i)) {
+                                var o = ptable[j + 20];
+                            } else {
+                                var o = ptable[j - 5];
+                            }
+                        }
+                        if (B == ptable[j]) {
+                            if (j == (i)) {
+                                var t = ptable[j + 20];
+                            } else {
+                                var t = ptable[j - 5];
+                            }
+                        }
+                    }
+
+                    if (iter == 2) {
+                        textout.splice(l, 1, o);
+                        textout.splice(l + 1, 1, t);
+                        iter = 0;
+                        chgrec.push(l);
+                        console.log("value of ptable: " + ptable);
+                        console.log("value of textout: " + textout);
+                        console.log("Letters" + A + " and " + B + " are in same column, text out: " + textout);
+                    } else {
+                        iter = 0;
+                        console.log("Not in the same comun: " + A + " and " + B);
+                    }
+
+                }
+                //}
+
+                //for(l=0;l<textin.length-1;l=l+2){
+                //var A=textin[l];
+
+                //var B=textin[l+1];
+                var ity = 0;
+                var xyval = [0, 0];
+                var mdiff = 0;
+                var iter = 0;
+                var abs = 0;
+                for (i = 0; i < chgrec.length; i = i + 1) {
+                    if (l == chgrec[i]) {
+                        ity = ity + 1;
+                    }
+                }
+
+                if (ity == 0) {
+                    for (j = 0; j < ptable.length; j++) {
+                        if (A == ptable[j]) {
+                            xyval.splice(0, 1, j);
+
+                        }
+                        if (B == ptable[j]) {
+                            xyval.splice(1, 1, j);
+                        }
+                    }
+                    var col1 = xyval[0] % 5;
+                    var col2 = xyval[1] % 5;
+                    console.log(col1);
+                    console.log(col2);
+                    if ((col1 - col2) > 0) {
+                        var abs = col1 - col2;
+                        xyval.splice(0, 1, (xyval[0] - abs));
+                        xyval.splice(1, 1, (xyval[1] + abs));
+                    } else {
+                        var abs = col2 - col1;
+                        xyval.splice(0, 1, (xyval[0] + abs));
+                        xyval.splice(1, 1, (xyval[1] - abs));
+                    }
+                    textout.splice(l, 1, ptable[xyval[0]]);
+                    textout.splice(l + 1, 1, ptable[xyval[1]]);
+                }
+            }
+            //var str = "a,d,k";
+            //var y1 = document.getElementById("plaintextin");
+            //var textin1 = y1.value;
+            //var textin 1= textin1.split("");
+            for (i = 0; i < textout.length; i = i + 1) {
+                if (textout[i] == 'i' && textin2[i] != 'i') {
+                    textout.splice(i, 1, 'j');
+                }
+            }
+            if ((textin2.length) % 2 != 0)
+                textout.pop();
+            textout = textout.toString().replace(/,/g, "");
+            document.getElementById("decoded").innerHTML = textout;
+        }
+
+        function encodectext() {
+            var x = document.getElementById("cipherin");
+            var cipher = x.value;
+            var y = document.getElementById("plaintextin");
+            var textin = y.value;
+            var textin = textin.split("");
+            // If there are an uneven amount of letters, append a 'z' to complete
+            if ((textin.length % 2) == 1) {
+                textin.push('z');
+            } else {}
+            console.log("hi");
+            for (i = 0; i < textin.length; i = i + 1) {
+                if (textin[i] == 'j') {
+                    textin.splice(i, 1, 'i');
+                }
+            }
+            //Now check to see if there are two of the same letters in any given digraph, then in those digraphs change the second letter to an 'x'
+            for (i = 0; i < textin.length; i = i + 2) {
+                if (textin[i] == textin[i + 1]) {
+                    textin.splice(i + 1, 1, 'x');
+                }
+            }
+            //now call the ciphersquare function to generate an array with the cipher square
+            var ptable = ciphersquare(cipher);
+            //make an array that records which digraphs have been changed(encoded) already
+            var chgrec = [];
+            //now for the hard parts: First, if the letters appear on the same row, replace them with the one directly to their right; wrapping around if needed
+            var textout = textin;
+
+            for (l = 0; l < textin.length - 1; l = l + 2) {
+                var A = textin[l];
+                var B = textin[l + 1];
+
+                for (i = 0; i < 25; i = i + 5) {
+                    var iter = 0;
+                    for (j = i; j < i + 5; j++) {
+                        if (A == ptable[j]) {
+                            iter = iter + 1;
+                            console.log(A + " is in series " + i + " through " + (i + 4) + " : " + iter + " time.");
+                        }
+                        if (B == ptable[j]) {
+                            iter = iter + 1;
+                            console.log(B + " is in series " + i + " through " + (i + 4) + " : " + iter + " time.");
+                        }
+
+                        if (A == ptable[j]) {
+                            if (j == (i + 4)) {
+                                var o = ptable[j - 4];
+                            } else {
+                                var o = ptable[j + 1];
+                            }
+                        }
+                        if (B == ptable[j]) {
+                            if (j == (i + 4)) {
+                                var t = ptable[j - 4];
+                            } else {
+                                var t = ptable[j + 1];
+                            }
+                        }
+                    }
+                    if (iter == 2) {
+                        textout.splice(l, 1, o);
+                        textout.splice(l + 1, 1, t);
+                        iter = 0;
+                        chgrec.push(l);
+                        console.log("value of ptable: " + ptable);
+                        console.log("value of textout: " + textout);
+                        console.log("Letters" + A + " and " + B + " are in same row, text out: " + textout);
+
+                    } else {
+                        iter = 0;
+                        console.log("Not in the same row: " + A + " and " + B);
+                    }
+                }
+                //}
+
+                //If the letter pair appears on the same column, replace them with the one immediately below, also wrapping if needed
+                //for(l=0;l<textin.length-1;l=l+2){
+                //var A=textin[l];
+                //var B=textin[l+1];
+
+                for (i = 0; i < 5; i = i + 1) {
+                    var iter = 0;
+                    for (j = i; j < 25; j = j + 5) {
+                        if (A == ptable[j]) {
+                            iter = iter + 1;
+                            console.log(A + " is in Column " + i + " : " + iter + " time.");
+                        }
+                        if (B == ptable[j]) {
+                            iter = iter + 1;
+                            console.log(B + " is in Column " + i + " : " + iter + " time.");
+                        }
+                        if (A == ptable[j]) {
+                            if (j == (i + 20)) {
+                                var o = ptable[j - 20];
+                            } else {
+                                var o = ptable[j + 5];
+                            }
+                        }
+                        if (B == ptable[j]) {
+                            if (j == (i + 20)) {
+                                var t = ptable[j - 20];
+                            } else {
+                                var t = ptable[j + 5];
+                            }
+                        }
+                    }
+
+                    if (iter == 2) {
+                        textout.splice(l, 1, o);
+                        textout.splice(l + 1, 1, t);
+                        iter = 0;
+                        chgrec.push(l);
+                        console.log("value of ptable: " + ptable);
+                        console.log("value of textout: " + textout);
+                        console.log("Letters" + A + " and " + B + " are in same column, text out: " + textout);
+                    } else {
+                        iter = 0;
+                        console.log("Not in the same comun: " + A + " and " + B);
+                    }
+
+                }
+
+
+                //}
+                //Finally,If the letter pair appeas in diffrent rows and collumns, replace each letter with the letter on the same row as itself, but on the column of the other letter
+                // I haven't been back to this in a while...this part still doesn't work as of 1/26/2016. Hmm. Well, I'll get there.
+                //for(l=0;l<textin.length-1;l=l+2){
+                //var A=textin[l];
+
+                //var B=textin[l+1];
+                console.log("ji");
+                var iter = 0;
+                var ity = 0;
+                var xyval = [0, 0];
+                var mdiff = 0;
+                var abs = 0;
+                for (i = 0; i < chgrec.length; i = i + 1) {
+                    if (l == chgrec[i]) {
+                        ity = ity + 1;
+                    }
+                }
+
+                if (ity == 0) {
+                    for (j = 0; j < ptable.length; j++) {
+                        if (A == ptable[j]) {
+                            xyval.splice(0, 1, j);
+
+                        }
+                        if (B == ptable[j]) {
+                            xyval.splice(1, 1, j);
+                        }
+                    }
+                    var col1 = xyval[0] % 5;
+                    var col2 = xyval[1] % 5;
+                    console.log(col1);
+                    console.log(col2);
+                    if ((col1 - col2) > 0) {
+                        var abs = col1 - col2;
+                        //mdiff=(xyval[0]-xyval[1])%5;
+                        xyval.splice(0, 1, (xyval[0] - abs));
+                        xyval.splice(1, 1, (xyval[1] + abs));
+                    } else {
+                        var abs = col2 - col1;
+                        //mdiff=Math.abs((xyval[0]-xyval[1]))%5;
+                        xyval.splice(0, 1, (xyval[0] + abs));
+                        xyval.splice(1, 1, (xyval[1] - abs));
+                    }
+                    textout.splice(l, 1, ptable[xyval[0]]);
+                    textout.splice(l + 1, 1, ptable[xyval[1]]);
+                }
+            }
+            //The following prints the encoded text to the browser:
+            textout = textout.toString().replace(/,/g, "");
+            document.getElementById("encoded").innerHTML = textout;
+            console.log("digraphs changed:" + chgrec);
+        }
+
+        console.log("ptable: " + ptable);
+        console.log("textin: " + textin);
+    </script>
+
+</body>
+
+</html>

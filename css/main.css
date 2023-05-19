@@ -1,0 +1,93 @@
+    .img {
+        width: 100%;
+        height: 250px
+    }
+    
+    header {
+        margin-bottom: 5rem;
+        padding-bottom: 1rem;
+        font-family: Century Gothic;
+        color: #e60303;
+        text-align: center;
+        background-color: rgba(0, 0, 0, .5);
+        width: auto;
+        height: 80px;
+        position: relative;
+        border-bottom: 2px solid #ffffff;
+    }
+    
+    body {
+        margin: 0;
+        padding: 0;
+        background-size: cover;
+        font-family: Bookman Old Style;
+        text-align: center;
+        font-size: 2rem;
+    }
+    
+    p {
+        text-align: center;
+        color: #000000;
+        list-style: none;
+        text-decoration: none;
+    }
+    
+    img {
+        width: 11px;
+        height: 11px;
+        transform: translate(4%, 5%);
+        border: 3px solid #fff;
+        display: inline;
+        opacity: 100;
+        padding-left: 4px;
+    }
+    
+    li {
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    li a {
+        background-color: rgba(207, 26, 26, 0);
+        border: none;
+        border-radius: 2%;
+        color: #fff;
+        padding: 10px 30px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 50px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        margin: 10px;
+    }
+    
+    li a {
+        -webkit-transition-duration: 1s;
+        transition-duration: 0.7s;
+    }
+    
+    li a:hover {
+        background-color: #fff;
+        color: #000;
+    }
+    
+    a img {
+        width: 300px;
+        height: 300px;
+        margin: 10px;
+        position: relative;
+    }
+    
+    footer {
+        height: auto;
+        width: 100vw;
+        font-family: "Open Sans";
+        padding-top: 5rem;
+        padding-bottom: 5px;
+        color: black;
+    }
+    
+    .a {
+        font-size: 40px;
+    }

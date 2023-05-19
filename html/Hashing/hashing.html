@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta itemprop="name" content="HTML5HASH" />
+    <meta itemprop="description" content="A tool that uses HTML5 features to provide file hashing with crc32, md5, sha1, sha256, sha512, sha3 and ripdemd160 without the need to upload anything." />
+    <meta itemprop="applicationCategory" content="Tool" />
+    <meta itemprop="applicationSubCategory" content="Hashing tool" />
+    <meta itemprop="browserRequirements" content="HTML5 support including FileReader(), Blob() with slices as well as Drag & Drop" />
+
+    <title>Hashing</title>
+    <link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/ui-lightness/jquery-ui.min.css" rel="stylesheet" />
+    <link type="text/css" href="html5hash.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="js/md5.js"></script>
+    <script type="text/javascript" src="js/sha1.js"></script>
+    <script type="text/javascript" src="js/sha256.js"></script>
+    <script type="text/javascript" src="js/sha512.js"></script>
+    <script type="text/javascript" src="js/sha3.js"></script>
+    <script type="text/javascript" src="js/ripemd160.js"></script>
+    <script type="text/javascript" src="js/crc32.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="html5hash.js"></script>
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-33847832-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</head>
+<header>
+    <li><a href="../../index.html">Home</a></li>
+</header>
+
+<body id="drop_zone" style="background-image:url(img/background.jpg)">
+    <div id="centerfield">
+
+        <header>
+            <fieldset id="algo_selection">
+                <legend>Algorithm selection</legend>
+                <form>
+                    <table>
+                        <tr>
+                            <td><input type="checkbox" name="crc32switch" checked="checked" />CRC-32</td>
+                            <td><input type="checkbox" name="MD5-switch" />MD5</td>
+                            <td><input type="checkbox" name="SHA1-switch" />SHA1 </td>
+                            <td id="algosshow"><a href="#">more</a></td>
+                        </tr>
+                        <tr class="additionalalgos">
+                            <td><input type="checkbox" name="RIPEMD-160-switch" />RIPEMD-160</td>
+                            <td><input type="checkbox" name="SHA256-switch" />SHA256</td>
+                            <td><input type="checkbox" name="SHA512-switch" />SHA512</td>
+                        </tr>
+                        <tr class="additionalalgos">
+                            <td><input type="checkbox" name="SHA3-224-switch" />SHA3-224</td>
+                            <td><input type="checkbox" name="SHA3-256-switch" />SHA3-256</td>
+                            <td><input type="checkbox" name="SHA3-384-switch" />SHA3-384</td>
+                        </tr>
+                        <tr class="additionalalgos">
+                            <td><input type="checkbox" name="SHA3-512-switch" />SHA3-512</td>
+                            <td>&nbsp;</td>
+                            <td id="algoshide"><a href="#">less</a></td>
+                        </tr>
+                    </table>
+                </form>
+            </fieldset>
+
+            <h1>HTML5HASH</h1>
+
+        </header>
+
+        <article>
+            <ul id="list">
+                <li>
+                    <b>File selection</b>
+                    <div id="placeholder">
+                        <b>Drop</b> files here or <b>click to browse.</b>
+                    </div>
+                    <input type="file" id="hiddenFilesSelector" multiple />
+                </li>
+            </ul>
+        </article>
+
+        <aside id="explanation">
+            <span itemprop="description">Hashes are computed locally. No files or information on files will be uploaded.</span>
+        </aside>
+
+    </div>
+
+
+    <div id="overlay">
+
+    </div>
+
+    <!-- Work around opacity inheritance by having this seperate. -->
+
+    <div id="overlaytextbox">
+        <h3>Sorry</h3><br />
+        <div id="nojavascript">This site requires <a href="http://www.enable-javascript.com/" target="_blank">JavaScript</a>.</div>
+        <div id="missingfeatures"></div>
+    </div>
+
+</body>
+
+</html>

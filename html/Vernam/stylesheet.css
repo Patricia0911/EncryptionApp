@@ -1,0 +1,136 @@
+#main {
+    max-width: 25em;
+    margin: auto;
+}
+
+header {
+    margin: 0;
+    padding: 0;
+    font-family: Century Gothic;
+    color: #fff;
+    text-align: center;
+    background-color: rgba(0, 0, 0, .5);
+    width: auto;
+    height: 69px;
+    position: relative;
+    border-bottom: 2px solid #fff;
+}
+
+li a {
+    background-color: rgb(0, 0, 0, 0);
+    border: none;
+    border-radius: 2%;
+    color: #fff;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 25px;
+    margin-top: 20px;
+    margin: 10px;
+}
+
+li a:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.grid {
+    display: grid;
+    grid-template-areas: "key" "txt" "btn" "wrn";
+    grid-gap: 0.5em;
+}
+
+textarea {
+    border: solid rgb(225, 217, 228) 1px
+}
+
+#key {
+    grid-area: key;
+}
+
+#plaintext {
+    grid-area: txt;
+}
+
+#warning {
+    grid-area: wrn;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    padding: 1em;
+    transition: background-color 0.2s;
+}
+
+.error {
+    background-color: #f44336;
+    transition: background-color 0.2s;
+    color: white;
+}
+
+.info {
+    background-color: #6aa84f;
+    transition: background-color 0.2s;
+    color: white;
+}
+
+.btns {
+    grid-area: btn;
+    display: grid;
+    grid-template-areas: "cip cip dec dec . cop";
+    grid-gap: 0.5em;
+}
+
+button:active {
+    background-color: rgb(203, 209, 203);
+}
+
+.btn {
+    padding: 5px;
+    max-width: 10em;
+    min-height: 3em;
+    text-align: right;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    grid-template-areas: "i t";
+    background-color: white;
+    border: solid rgb(225, 217, 228) 1px;
+}
+
+#cipher {
+    grid-area: cip;
+}
+
+#decipher {
+    grid-area: dec;
+}
+
+#copy {
+    grid-area: cop;
+    justify-self: right;
+}
+
+.icons {
+    height: 50px;
+    width: 50px;
+    display: block;
+    grid-area: i;
+}
+
+.cip {
+    background: url('./icons/cipher.png') no-repeat;
+}
+
+.dec {
+    background: url('./icons/decipher.png') no-repeat;
+}
+
+.cop {
+    background: url('./icons/copy.png') no-repeat;
+}
+
+.txt {
+    grid-area: t;
+    align-self: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}

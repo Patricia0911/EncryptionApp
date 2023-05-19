@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Encode or decode a message using an anicent cipher method.">
+    <meta name="author" content="Recidvst">
+
+    <title>Caesar Cipher</title>
+
+    <link href="cipher.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fugaz+One|Montserrat:200,300,400" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+
+</head>
+<header>
+    <li><a href="../../index.html">Home</a></li>
+</header>
+
+<body style="background-image:url(../img/background.jpg)">
+
+    <div id="app">
+        <caesar-cipher inline-template>
+            <div class="caesar-cipher" :class="{ encode: toggle, decode: !toggle }">
+
+                <div class="header">
+                    <h1 class="title">Caesar Cipher </h1>
+                    <div id="toggle">
+                        <span class="toggle-span subtitle encode" :class="{ disabled: toggle }"> Encode </span>
+                        <label class="switch">
+                    <input id="encodeToggle" type="checkbox" v-on:click="checkboxToggle">
+                    <span class="slider round"></span>
+                </label>
+                        <span class="toggle-span subtitle decode" :class="{ disabled: !toggle }"> Decode </span>
+                    </div>
+                </div>
+
+                <div class="body">
+                    <div class="controls">
+                        <div id="source">
+                            <form>
+                                <p> Choose the source of characters to be used in the cipher. <br/> Standard is a-z, but feel free to mix it up. <br/> Letters only, and if you want caps, then you'll need them here.</p>
+                                <input id="source-string" type="text" class="source-string" v-model="possible" value="{possible}" required />
+                                <p> Choose the shift value. This is the number of characters the encoder will shift each letter.</p>
+                                <input type="number" class="shift-value" v-model="shift" value="edit me" required />
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="display">
+                        <div class="box-wrapper" :class="{ encode: toggle, decode: !toggle }">
+                            <h2 class="subtitle"> {{status}} </h2>
+                            <hr />
+                            <form>
+                                <textarea id="encode-cmd" class="code-value" v-on:keyup="encoder($event)">{{currentDecoded}}</textarea>
+                                <div class="arrow bounce" :class="{ encode: toggle, decode: !toggle }">
+                                    <a class="fa fa-arrow-down fa-2x" href="#"></a>
+                                </div>
+                                <p class="code-value"> {{currentEncoded}} </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </caesar-cipher>
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="cipher.js"></script>
+
+</html>

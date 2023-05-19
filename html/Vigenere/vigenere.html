@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vigenère Cipher</title>
+    <meta name="description" content="Encode, decode, and solve using the Vigenère cipher with your custom alphabet.">
+
+    <link rel="stylesheet" href="css/styles.css"> >
+</head>
+<header>
+    <li><a href="../../index.html">Home</a></li>
+</header>
+
+<body style="background-image:url(../img/background.jpg)">
+    <div class="container">
+
+        <div class="alphabet-container">
+            <h2 class="page-subtitle alphabet-title">Alphabet</h2>
+            <input type="text" class="alphabet-field" placeholder="e.g., abcdefghijklmnopqrstuvwxyz" value="abcdefghijklmnopqrstuvwxyz" spellcheck="false" required>
+        </div>
+
+        <div class="text-and-options-container">
+            <div class="text-container">
+                <h2 class="page-subtitle input-field-title">Plaintext</h2>
+                <textarea class="text-area input-field" placeholder="e.g., Hello, world!" spellcheck="false"></textarea>
+            </div>
+
+            <div class="options-container">
+                <h2 class="page-subtitle">Options</h2>
+
+                <div class="option-container">
+                    <label class="option-label">Mode</label>
+                    <select class="mode-field" id="mode">
+                        <option value="encode">Encode</option>
+                        <option value="decode">Decode</option>
+                        <option value="solve">Solve</option>
+                    </select>
+                </div>
+
+                <div class="option-container key-option">
+                    <label class="option-label key-field-label">Key</label>
+                    <input type="text" class="option-field key-field" placeholder="e.g., orange" spellcheck="false" required>
+                </div>
+
+                <div class="option-container solve-option">
+                    <label class="option-label">Key Length Range</label>
+                    <input type="text" class="option-field key-length-field" placeholder="e.g., 3-10" spellcheck="false" required>
+                </div>
+
+                <div class="option-container solve-option">
+                    <label class="option-label">Most Common Character</label>
+                    <input type="text" class="option-field common-char-field" placeholder="i.e., from your alphabet" spellcheck="false" required>
+                </div>
+            </div>
+
+            <div class="text-container">
+                <h2 class="page-subtitle output-field-title">Ciphertext</h2>
+                <textarea class="text-area output-field" spellcheck="false"></textarea>
+                <p class="solution-info"></p>
+            </div>
+        </div>
+
+        <div class="actions-container">
+            <div class="action-button unselectable">Encrypt</div>
+        </div>
+    </div>
+
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>

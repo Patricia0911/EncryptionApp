@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <title>Encryption Application</title>
+
+</head>
+<style>
+    .dropdown {
+        display: inline-block;
+        position: relative;
+    }
+    
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        width: 100%;
+        overflow: auto;
+        box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.4);
+    }
+    
+    .dropdown:hover .dropdown-content {
+        display: block;
+        font-size: larger;
+    }
+    
+    .dropdown-content a {
+        display: block;
+        color: #413d3d;
+        text-decoration: none;
+        font-size: larger;
+        padding-top: 1rem;
+    }
+    
+    .dropdown-content a:hover {
+        color: #3134f8;
+        background-color: #17f0ff;
+    }
+    
+    button {
+        font-size: larger;
+    }
+</style>
+<header>
+    <li><a>Encryption Application</a></li>
+</header>
+
+<body style="background-image:url(img/background.jpg)">
+    <div class="dropdown">
+        <label for="lang">Cipher Method</label>
+        <button>Select here<img src="img/download.png"></button>
+        <div class="dropdown-content">
+            <a href="html/Caesar/caesar.html">Caesar Cipher</a>
+            <a href="html/Vigenere/vigenere.html">Vigenere Cipher</a>
+            <a href="html/playfair.html">Playfair Cipher</a>
+            <a href="html/Vernam/main.html">Vernam Cipher</a>
+            <a href="html/Hashing/hashing.html">Hashing</a>
+        </div>
+    </div>
+</body>
+
+<footer>
+    <p>Created By:</p>
+    <p>Patricia Monick Longcayana</p>
+    <p>Jovel Agapay</p>
+    <p>Erica Ricafrente</p>
+</footer>
+
+</body>
+
+</html>
